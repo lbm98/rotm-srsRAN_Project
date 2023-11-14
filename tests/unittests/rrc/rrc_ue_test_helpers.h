@@ -168,7 +168,7 @@ protected:
     rrc_ue->get_rrc_ue_srb_handler().create_srb(msg);
   }
 
-  void receive_setup_request(optional<std::array<uint8_t, 6>> buffer = nullopt)
+  void receive_setup_request(optional<std::vector<uint8_t>> buffer = nullopt)
   {
     // inject RRC setup into UE object
     if (buffer.has_value()) {

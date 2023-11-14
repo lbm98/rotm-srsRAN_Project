@@ -7,20 +7,32 @@ sudo apt-get install -y build-essential python3-dev automake cmake git flex biso
 PROJECT_DIR=`pwd`
 ```
 
-### AFL
+### AFL++
+
+- https://github.com/antonio-morales/Fuzzing101/tree/main/Exercise%201
+- https://github.com/fuzzstati0n/fuzzgoat
+
+TODO:
+
+- Add pcap dict
 
 ```bash
 cd "$PROJECT_DIR"
 git clone --depth 1 https://github.com/AFLplusplus/AFLplusplus
 cd AFLplusplus
-make source-only
-```
+make source-only LLVM_CONFIG=llvm-config-14 NO_NYX=1 NO_PYTHON=1
 
-```bash
 cd "$PROJECT_DIR"
 mkdir build
 cd build
 cmake -DCMAKE_C_COMPILER="$PROJECT_DIR"/AFLplusplus/afl-clang-fast -DCMAKE_CXX_COMPILER="$PROJECT_DIR"/AFLplusplus/afl-clang-fast++ ..
+cmake --build . --target rrc_ue_setup_proc_fuzz_test -v
+
+cd "$PROJECT_DIR"
+sudo ./AFLplusplus/afl-system-config
+./AFLplusplus/afl-fuzz -i "$PROJECT_DIR"/fuzz/input -o "$PROJECT_DIR"/fuzz/output -s 123 -- "$PROJECT_DIR"/build/tests/unittests/rrc/rrc_ue_setup_proc_fuzz_test @@
+
+time "$PROJECT_DIR"/build/tests/unittests/rrc/rrc_ue_setup_proc_fuzz_test "$PROJECT_DIR"/fuzz/input/rrc_setup.bin
 ```
 
 ### fuzztest
@@ -35,5 +47,5 @@ cmake \
 -DCMAKE_BUILD_TYPE=RelWithDebug \
 -DFUZZTEST_FUZZING_MODE=on \
 ..
-cmake --build . -j `nproc` --target rrc_ue_test -v #--clean-first
+cmake --build . -j `nproc` --target rrc_ue_test -v
 ```

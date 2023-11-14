@@ -39,7 +39,6 @@ target_link_libraries(rrc_ue_test rrc_ue_test_helpers srsran_e1ap srsran_rrc srs
 gtest_discover_tests(rrc_ue_test PROPERTIES "LABELS;rrc_ue")
 
 
-add_executable(rrc_ue_setup_proc_fuzz rrc_ue_setup_proc_fuzz.cpp)
-target_include_directories(rrc_ue_setup_proc_fuzz PRIVATE ${CMAKE_SOURCE_DIR})
-#target_link_libraries(rrc_ue_setup_proc_fuzz rrc_ue_test_helpers srsran_rrc gtest)
-target_link_libraries(rrc_ue_setup_proc_fuzz rrc_ue_test_helpers srsran_e1ap srsran_rrc srsran_cu_cp_cell_meas_manager srsran_support srslog gtest)
+add_executable(rrc_ue_setup_proc_fuzz_test rrc_ue_setup_proc_fuzz_test.cpp)
+target_include_directories(rrc_ue_setup_proc_fuzz_test PRIVATE ${CMAKE_SOURCE_DIR})
+target_link_libraries(rrc_ue_setup_proc_fuzz_test rrc_ue_test_helpers srsran_rrc gtest)
