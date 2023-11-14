@@ -177,6 +177,15 @@ endif()
 # Find dependencies
 ########################################################################
 
+#include(FetchContent)
+#FetchContent_Declare(
+#        fuzztest
+#        GIT_REPOSITORY https://github.com/google/fuzztest.git
+#        GIT_TAG main
+#)
+#FetchContent_MakeAvailable(fuzztest)
+
+
 # Backward-cpp
 find_package(Backward)
 if(Backward_FOUND)

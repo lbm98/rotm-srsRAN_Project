@@ -1,0 +1,89 @@
+/home/lbm/rotm4/rotm-srsRAN_Project/cmake-build-debug/tests/unittests/rrc/rrc_ue_test --gtest_filter=rrc_ue_setup.when_amf_connected_then_rrc_setup_sent:rrc_ue_setup/*.when_amf_connected_then_rrc_setup_sent:rrc_ue_setup.when_amf_connected_then_rrc_setup_sent/*:*/rrc_ue_setup.when_amf_connected_then_rrc_setup_sent/*:*/rrc_ue_setup/*.when_amf_connected_then_rrc_setup_sent --gtest_color=no
+Testing started at 17:58 ...
+Running main() from ./googletest/src/gtest_main.cc
+2023-11-14T16:58:39.855112 [RRC     ] [D] ue=23 - Rx CCCH UL rrcSetupRequest (6 B)
+2023-11-14T16:58:39.855116 [RRC     ] [D] Content: [
+  {
+    "UL-CCCH-Message": {
+      "message": {
+        "c1": {
+          "rrcSetupRequest": {
+            "rrcSetupRequest": {
+              "ue-Identity": {
+                "randomValue": "110111101100100010011101000001010111011"
+              },
+              "establishmentCause": "mo-Signalling",
+              "spare": "0"
+            }
+          }
+        }
+      }
+    }
+  }
+]
+2023-11-14T16:58:39.855127 [RRC     ] [D] ue=23 Creating SRB1.
+2023-11-14T16:58:39.855136 [PDCP    ] [D] No RRC handler for PDCP Tx control events. All events will be ignored.
+2023-11-14T16:58:39.855137 [PDCP    ] [D] No RRC handler for PDCP Rx control events. All events will be ignored.
+2023-11-14T16:58:39.855157 [PDCP    ] [I] ue=23 SRB1 DL: PDCP configured. rb_type=SRB rlc_mode=AM sn_size=12 discard_timer={na} count_notify=3221225472 count_max=4294967294
+2023-11-14T16:58:39.855170 [PDCP    ] [I] ue=23 SRB1 UL: PDCP configured. rb_type=SRB rlc_mode=AM sn_size=12 t_reordering=-1 count_notify=3221225472 count_max=3489660928
+2023-11-14T16:58:39.855233 [RRC     ] [D] ue=23 - Tx CCCH DL rrcSetup (5 B)
+2023-11-14T16:58:39.855235 [RRC     ] [D] Content: [
+  {
+    "DL-CCCH-Message": {
+      "message": {
+        "c1": {
+          "rrcSetup": {
+            "rrc-TransactionIdentifier": 0,
+            "criticalExtensions": {
+              "rrcSetup": {
+                "radioBearerConfig": {
+                  "srb-ToAddModList": [
+                    {
+                      "srb-Identity": 1
+                    }
+                  ]
+                },
+                "masterCellGroup": "00"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+]
+2023-11-14T16:58:39.855239 [RRC     ] [D] ue=23 C-RNTI=4660 TX SRB0 PDU
+2023-11-14T16:58:39.855262 [RRC     ] [D] ue=23 C-RNTI=4660 RX SRB1 PDCP PDU
+2023-11-14T16:58:39.855283 [PDCP    ] [D] ue=23 SRB1 UL: RX PDU. pdu_len=127
+2023-11-14T16:58:39.855289 [PDCP    ] [D] ue=23 SRB1 UL: RX entity state. rx_next=0 rx_deliv=0 rx_reord=0
+2023-11-14T16:58:39.855297 [PDCP    ] [I] ue=23 SRB1 UL: RX PDU. type=data pdu_len=127 sn=0 count=0
+2023-11-14T16:58:39.855305 [PDCP    ] [I] ue=23 SRB1 UL: RX SDU. count=0
+2023-11-14T16:58:39.855309 [PDCP    ] [D] ue=23 SRB1 UL: RX entity state. rx_next=1 rx_deliv=1 rx_reord=0
+2023-11-14T16:58:39.855314 [RRC     ] [D] ue=23 C-RNTI=4660 RX SRB1 RRC PDU (121 B)
+2023-11-14T16:58:39.855401 [RRC     ] [D] ue=23 SRB1 - Rx DCCH UL rrcSetupComplete (121 B)
+2023-11-14T16:58:39.855403 [RRC     ] [D] Content: [
+  {
+    "UL-DCCH-Message": {
+      "message": {
+        "c1": {
+          "rrcSetupComplete": {
+            "rrc-TransactionIdentifier": 0,
+            "criticalExtensions": {
+              "rrcSetupComplete": {
+                "selectedPLMN-Identity": 1,
+                "registeredAMF": {
+                  "amf-Identifier": "100000000000000001000001"
+                },
+                "guami-Type": "native",
+                "dedicatedNAS-Message": "7e01c3ff100c047e004139000bf202f8998000410000000f2e04f070f0707100517e004139000bf202f8998000410000000f1001032e04f070f0702f1b08010027db00000000080101b669000000000801000001000000005202f8990000011707f070c0401980b018010174000090530101"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+]
+2023-11-14T16:58:39.855422 [RRC     ] [D] ue=23 "RRC Setup Procedure" finished successfully
+2023-11-14T16:58:39.855424 [TEST    ] [I] Received Initial UE Message
+Process finished with exit code 0

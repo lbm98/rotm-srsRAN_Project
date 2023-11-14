@@ -168,10 +168,14 @@ protected:
     rrc_ue->get_rrc_ue_srb_handler().create_srb(msg);
   }
 
-  void receive_setup_request()
+  void receive_setup_request(optional<std::array<uint8_t, 6>> buffer = nullopt)
   {
     // inject RRC setup into UE object
-    rrc_ue->get_ul_ccch_pdu_handler().handle_ul_ccch_pdu(byte_buffer{rrc_setup_pdu});
+    if (buffer.has_value()) {
+      rrc_ue->get_ul_ccch_pdu_handler().handle_ul_ccch_pdu(byte_buffer{buffer.value()});
+    } else {
+      rrc_ue->get_ul_ccch_pdu_handler().handle_ul_ccch_pdu(byte_buffer{rrc_setup_pdu});
+    }
   }
 
   void receive_invalid_reestablishment_request(pci_t pci, rnti_t c_rnti)
@@ -192,10 +196,14 @@ protected:
     rrc_ue->get_ul_dcch_pdu_handler().handle_ul_dcch_pdu(srb_id_t::srb1, byte_buffer{rrc_reest_complete_pdu});
   }
 
-  void receive_setup_complete()
+  void receive_setup_complete(optional<std::vector<uint8_t>> buffer = nullopt)
   {
     // inject RRC setup complete
-    rrc_ue->get_ul_dcch_pdu_handler().handle_ul_dcch_pdu(srb_id_t::srb1, byte_buffer{rrc_setup_complete_pdu});
+    if (buffer.has_value()) {
+      rrc_ue->get_ul_dcch_pdu_handler().handle_ul_dcch_pdu(srb_id_t::srb1, byte_buffer{buffer.value()});
+    } else {
+      rrc_ue->get_ul_dcch_pdu_handler().handle_ul_dcch_pdu(srb_id_t::srb1, byte_buffer{rrc_setup_complete_pdu});
+    }
   }
 
   void send_dl_info_transfer(byte_buffer nas_pdu)
