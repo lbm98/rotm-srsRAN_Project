@@ -41,4 +41,5 @@ gtest_discover_tests(rrc_ue_test PROPERTIES "LABELS;rrc_ue")
 
 add_executable(rrc_ue_setup_proc_fuzz_test rrc_ue_setup_proc_fuzz_test.cpp)
 target_include_directories(rrc_ue_setup_proc_fuzz_test PRIVATE ${CMAKE_SOURCE_DIR})
-target_link_libraries(rrc_ue_setup_proc_fuzz_test rrc_ue_test_helpers srsran_rrc gtest)
+#target_link_libraries(rrc_ue_setup_proc_fuzz_test rrc_ue_test_helpers srsran_rrc gtest)
+target_link_libraries(rrc_ue_setup_proc_fuzz_test rrc_ue_test_helpers srsran_rrc gtest srsran_pcap)

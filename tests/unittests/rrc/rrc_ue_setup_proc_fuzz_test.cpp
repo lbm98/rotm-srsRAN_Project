@@ -14,7 +14,7 @@ public:
     connect_amf();
     receive_setup_request(rrc_setup);
     receive_setup_complete(rrc_setup_complete);
-//    srslog::flush();
+    //    srslog::flush();
   }
 
   void run2(std::vector<uint8_t> rrc_setup)
@@ -22,7 +22,7 @@ public:
     connect_amf();
     receive_setup_request(rrc_setup);
     tick_timer();
-//    srslog::flush();
+    //    srslog::flush();
   }
 };
 
@@ -87,17 +87,21 @@ void generate_input_corpus()
 
 int main(int argc, char* argv[])
 {
-  if (argc != 2) {
-    std::cerr << "Usage: " << argv[0] << " <filename>\n";
-    return 1;
-  }
+//  if (argc != 2) {
+//    std::cerr << "Usage: " << argv[0] << " <filename>\n";
+//    return 1;
+//  }
 
-  std::vector<uint8_t> bytes = read_bin(argv[1]);
+//  std::vector<uint8_t> bytes = read_bin(argv[1]);
 
-//  srslog::init();
-  rrc_ue_fuzz ue;
+  //  srslog::init();
 
-  ue.run2(bytes);
+//    rrc_ue_fuzz ue;
+//    ue.run2(bytes);
+
+  //  int *array = new int[100];
+  //  delete [] array;
+  //  return array[5];  // BOOM
 
   //  ue.run1(rrc_setup, rrc_setup_complete);
   //  ue.run2(rrc_setup);
@@ -105,8 +109,17 @@ int main(int argc, char* argv[])
   //  read_write_bin_test();
   //  generate_input_corpus();
 
-  //  dlt_pcap_impl pcap;
-  //  mac_pcap_writer.close();
+    //    When a pcap file uses one of the user DLTs (147 to 162)
+    //    Wireshark uses this table to know which dissector(s) to use for each user DLT.
+    constexpr uint16_t PCAP_MY_DLT = 162;
+    std::vector<uint8_t> rrc_setup = {0x1d, 0xec, 0x89, 0xd0, 0x57, 0x66};
+    pcap_file_base pcap;
+    pcap.dlt_pcap_open(PCAP_MY_DLT, "/tmp/rrc_ue_setup_proc_fuzz_test.pcap");
+
+    pcap.write_pcap_header(rrc_setup.size());
+    pcap.write_pcap_pdu(rrc_setup);
+
+    pcap.dlt_pcap_close();
 
   return 0;
 }

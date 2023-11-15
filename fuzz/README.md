@@ -9,7 +9,7 @@ PROJECT_DIR=`pwd`
 
 ### AFL++
 
-- https://github.com/antonio-morales/Fuzzing101/tree/main/Exercise%201
+- https://github.com/antonio-morales/Fuzzing101
 - https://github.com/fuzzstati0n/fuzzgoat
 
 TODO:
@@ -17,16 +17,28 @@ TODO:
 - Add pcap dict
 
 ```bash
+PROJECT_DIR=`pwd`
+
+export LLVM_CONFIG=llvm-config-14
+export AFL_USE_ASAN=1
+export AFL_CC_COMPILER=LLVM
+
 cd "$PROJECT_DIR"
 git clone --depth 1 https://github.com/AFLplusplus/AFLplusplus
 cd AFLplusplus
-make source-only LLVM_CONFIG=llvm-config-14 NO_NYX=1 NO_PYTHON=1
+make source-only NO_NYX=1 NO_PYTHON=1
 
 cd "$PROJECT_DIR"
 mkdir build
 cd build
-cmake -DCMAKE_C_COMPILER="$PROJECT_DIR"/AFLplusplus/afl-clang-fast -DCMAKE_CXX_COMPILER="$PROJECT_DIR"/AFLplusplus/afl-clang-fast++ ..
-cmake --build . --target rrc_ue_setup_proc_fuzz_test -v
+
+cmake \
+-DCMAKE_C_COMPILER="$PROJECT_DIR"/AFLplusplus/afl-cc \
+-DCMAKE_CXX_COMPILER="$PROJECT_DIR"/AFLplusplus/afl-c++ \
+..
+
+cmake --build . --target rrc_ue_setup_proc_fuzz_test
+cmake --build . --target rrc_ue_setup_proc_fuzz_test -v --clean-first
 
 cd "$PROJECT_DIR"
 sudo ./AFLplusplus/afl-system-config
