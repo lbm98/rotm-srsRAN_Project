@@ -6,6 +6,7 @@ SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 INPUT_DIR="$SCRIPT_DIR"/output/default/queue
 OUTPUT_DIR="$SCRIPT_DIR"/output/default/queue_decoded
 
+rm -rf "$OUTPUT_DIR"
 mkdir -p "$OUTPUT_DIR"
 
 for file in "$INPUT_DIR"/*; do

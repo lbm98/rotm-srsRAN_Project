@@ -168,11 +168,11 @@ protected:
     rrc_ue->get_rrc_ue_srb_handler().create_srb(msg);
   }
 
-  void receive_setup_request(optional<std::vector<uint8_t>> buffer = nullopt)
+  void receive_setup_request(optional<byte_buffer> pdu = nullopt)
   {
     // inject RRC setup into UE object
-    if (buffer.has_value()) {
-      rrc_ue->get_ul_ccch_pdu_handler().handle_ul_ccch_pdu(byte_buffer{buffer.value()});
+    if (pdu.has_value()) {
+      rrc_ue->get_ul_ccch_pdu_handler().handle_ul_ccch_pdu(std::move(pdu.value()));
     } else {
       rrc_ue->get_ul_ccch_pdu_handler().handle_ul_ccch_pdu(byte_buffer{rrc_setup_pdu});
     }

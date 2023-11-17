@@ -1,0 +1,5 @@
+- https://github.com/aflnet/aflnet
+- https://github.com/AFLplusplus/LibAFL
+- https://github.com/fkie-cad/butterfly
+- https://epi052.gitlab.io/notes-to-self/blog/2021-11-07-fuzzing-101-with-libafl-part-1.5/
+- https://epi052.gitlab.io/notes-to-self/blog/

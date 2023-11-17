@@ -11,6 +11,7 @@ PROJECT_DIR=`pwd`
 
 - https://github.com/antonio-morales/Fuzzing101
 - https://github.com/fuzzstati0n/fuzzgoat
+- https://github.com/vanhauser-thc/afl-cov
 
 TODO:
 
