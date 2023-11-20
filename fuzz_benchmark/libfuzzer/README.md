@@ -89,7 +89,7 @@ lib_coverage/*.a \
 
 LLVM_PROFILE_FILE="fuzzer.profraw" ./fuzzer_coverage MY_CORPUS/*
 
-# Can combine multiple raw profiles 
+# Can combine multiple raw profiles
 llvm-profdata merge -sparse fuzzer.profraw -o fuzzer.profdata
 
 llvm-cov report ./fuzzer_coverage -instr-profile=fuzzer.profdata

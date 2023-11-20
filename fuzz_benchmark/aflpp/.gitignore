@@ -1,0 +1,11 @@
+AFLplusplus
+coverage_bin
+coverage_build
+coverage_info
+coverage_lib
+fuzz_bin
+fuzz_build
+fuzz_info
+fuzz_lib
+output
+
