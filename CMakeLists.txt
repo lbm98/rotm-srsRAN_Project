@@ -177,15 +177,6 @@ endif()
 # Find dependencies
 ########################################################################
 
-#include(FetchContent)
-#FetchContent_Declare(
-#        fuzztest
-#        GIT_REPOSITORY https://github.com/google/fuzztest.git
-#        GIT_TAG main
-#)
-#FetchContent_MakeAvailable(fuzztest)
-
-
 # Backward-cpp
 find_package(Backward)
 if(Backward_FOUND)
@@ -365,7 +356,8 @@ add_subdirectory(apps)
 add_subdirectory(configs)
 add_subdirectory(docs)
 add_subdirectory(external)
-add_subdirectory(fuzz)
+#add_subdirectory(fuzz)
+add_subdirectory(fuzz_benchmark)
 add_subdirectory(lib)
 add_subdirectory(utils)
 

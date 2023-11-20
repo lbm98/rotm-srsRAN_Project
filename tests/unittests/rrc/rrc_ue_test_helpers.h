@@ -196,11 +196,11 @@ protected:
     rrc_ue->get_ul_dcch_pdu_handler().handle_ul_dcch_pdu(srb_id_t::srb1, byte_buffer{rrc_reest_complete_pdu});
   }
 
-  void receive_setup_complete(optional<std::vector<uint8_t>> buffer = nullopt)
+  void receive_setup_complete(optional<byte_buffer> pdu = nullopt)
   {
     // inject RRC setup complete
-    if (buffer.has_value()) {
-      rrc_ue->get_ul_dcch_pdu_handler().handle_ul_dcch_pdu(srb_id_t::srb1, byte_buffer{buffer.value()});
+    if (pdu.has_value()) {
+      rrc_ue->get_ul_dcch_pdu_handler().handle_ul_dcch_pdu(srb_id_t::srb1, std::move(pdu.value()));
     } else {
       rrc_ue->get_ul_dcch_pdu_handler().handle_ul_dcch_pdu(srb_id_t::srb1, byte_buffer{rrc_setup_complete_pdu});
     }

@@ -1,0 +1,2 @@
+add_subdirectory(libfuzzer)
+add_subdirectory(utils)
