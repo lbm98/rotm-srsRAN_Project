@@ -12,9 +12,10 @@
 
 - https://aflplus.plus/docs/parallel_fuzzing/
 
-# Tasks library
+## Fuzzing benchmarks
 
-- https://github.com/epi052/fuzzing-101-solutions/blob/main/exercise-5/tasks.py
+- https://github.com/google/fuzzbench
+- https://github.com/google/fuzzer-test-suite
 
 ## General fuzzing guidelines
 
