@@ -1,6 +1,8 @@
-```bash
-CXX="clang++" \
-CXXFLAGS="-fprofile-instr-generate -fcoverage-mapping" \
-OUT="/home/lbm/rotm4/rotm-srsRAN_Project/fuzz_benchmark/benchmarks/libxml2/out" \
-../build.sh
-```
+# Fuzzing 101
+
+- https://github.com/antonio-morales/Fuzzing101/tree/main/Exercise%205
+- https://epi052.gitlab.io/notes-to-self/blog/2022-01-17-fuzzing-101-with-libafl-part-5/
+
+# Fuzzbench
+
+- https://github.com/google/fuzzbench/tree/master/benchmarks/libxml2_xml

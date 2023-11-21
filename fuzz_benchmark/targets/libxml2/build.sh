@@ -7,6 +7,15 @@ export V=1
     --without-http \
     --without-legacy \
     --without-python
+
+./autogen.sh \
+    --disable-shared \
+    --without-debug \
+    --without-ftp \
+    --without-http \
+    --without-legacy \
+    --without-python
+
 make -j$(nproc)
 
 cd fuzz

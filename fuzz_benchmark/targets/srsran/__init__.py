@@ -6,8 +6,8 @@ THIS_SCRIPT_DIR = pathlib.Path(__file__).parent.resolve()
 CMAKE_SOURCE_DIR = THIS_SCRIPT_DIR.parent.parent.parent.resolve()
 
 HARNESS_CPP = THIS_SCRIPT_DIR / 'harness.cpp'
-STANDALONE_FUZZ_TARGET_MAIN_C = THIS_SCRIPT_DIR / '../StandaloneFuzzTargetMain.c'
-STANDALONE_FUZZ_TARGET_MAIN_O = THIS_SCRIPT_DIR / '../StandaloneFuzzTargetMain.o'
+STANDALONE_FUZZ_TARGET_MAIN_C = THIS_SCRIPT_DIR / 'StandaloneFuzzTargetMain.c'
+STANDALONE_FUZZ_TARGET_MAIN_O = THIS_SCRIPT_DIR / 'StandaloneFuzzTargetMain.o'
 
 
 def build_lib(
@@ -16,6 +16,7 @@ def build_lib(
         cxx: pathlib.Path,
         cflags: str,
         cxxflags: str,
+        source_dir: pathlib.Path,
         build_dir: pathlib.Path,
         lib_dir: pathlib.Path,
 ):
