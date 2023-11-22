@@ -46,7 +46,7 @@ The afl-gotcpu utility can help you understand if you still have idle CPU capaci
 ## Dependencies
 
 ```bash
-sudo apt-get install -y lld
+sudo apt-get install -y lld liblzma-dev
 
 python3 -m venv venv
 venv/bin/pip install -r requirements.txt

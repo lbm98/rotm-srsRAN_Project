@@ -1,12 +1,7 @@
 export V=1
 
-./autogen.sh \
-    --disable-shared \
-    --without-debug \
-    --without-ftp \
-    --without-http \
-    --without-legacy \
-    --without-python
+
+git clone --branch v2.12.0 --depth 1https://gitlab.gnome.org/GNOME/libxml2.git
 
 ./autogen.sh \
     --disable-shared \

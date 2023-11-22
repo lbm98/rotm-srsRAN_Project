@@ -14,7 +14,7 @@ import targets.srsran
 
 
 @dataclass
-class AFL:
+class AFL_CONFIG:
     BUILD_DIR = THIS_SCRIPT_DIR / 'AFLplusplus'
     CLANG_FAST = BUILD_DIR / 'afl-clang-fast'
     CLANG_FASTPP = BUILD_DIR / 'afl-clang-fast++'
@@ -24,35 +24,9 @@ class AFL:
     CORPUS_DIR = OUTPUT_DIR / 'fuzzer01/queue'
 
 
-@dataclass
-class FUZZ:
-    DIR = THIS_SCRIPT_DIR / 'fuzz'
-    BUILD_DIR = DIR / 'build'
-    LIB_DIR = DIR / 'lib'
-    BIN_DIR = DIR / 'bin'
-    BIN = BIN_DIR / 'fuzzer'
-    INFO_DIR = DIR / 'info'
-
-
-@dataclass
-class COVERAGE:
-    DIR = THIS_SCRIPT_DIR / 'coverage'
-    BUILD_DIR = DIR / 'build'
-    LIB_DIR = DIR / 'lib'
-    BIN_DIR = DIR / 'bin'
-    BIN = BIN_DIR / 'fuzzer'
-    INFO_DIR = DIR / 'info'
-
-    LLVM_PROFRAW = INFO_DIR / 'fuzzer.profraw'
-    LLVM_PROFDATA = INFO_DIR / 'fuzzer.profdata'
-    EXPORT_JSON = INFO_DIR / 'export.json'
-    TOTALS_JSON = INFO_DIR / 'totals.json'
-
-
 os.environ['LLVM_CONFIG'] = 'llvm-config-14'
 
 
-@task
 def build_aflpp(ctx: Context):
     if AFL.BUILD_DIR.exists():
         print('AFL++ already build...')
