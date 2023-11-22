@@ -1,0 +1,25 @@
+[package]
+name = "fuzzer"
+version = "0.1.0"
+edition = "2021"
+
+[profile.release]
+lto = true
+codegen-units = 1
+opt-level = 3
+debug = true
+
+[dependencies]
+libafl = { git = "https://github.com/example/libafl.git", rev = "cad2ff63191eb1291764b79285a1d4c65ccdbd18", features = ["default"] }
+libafl_cc = { git = "https://github.com/example/libafl.git", rev = "cad2ff63191eb1291764b79285a1d4c65ccdbd18" }
+libafl_bolts = { git = "https://github.com/example/libafl.git", rev = "cad2ff63191eb1291764b79285a1d4c65ccdbd18" }
+libafl_targets = { git = "https://github.com/example/libafl.git", rev = "cad2ff63191eb1291764b79285a1d4c65ccdbd18", features = [
+    "libfuzzer",
+    "sancov_pcguard_hitcounts",
+] }
+
+mimalloc = { version = "0.1.39", default-features = false }
+
+[lib]
+name = "fuzzer"
+crate-type = ["staticlib"]
