@@ -36,28 +36,43 @@ cargo build --release
 # Build libxml2 for fuzzing (no linking with libafl fuzzer)
 #
 
-#wget http://xmlsoft.org/download/libxml2-2.9.4.tar.gz
-#tar xvf libxml2-2.9.4.tar.gz
-#mkdir -p "$FUZZ_DIR"
-#mv libxml2-2.9.4 "$FUZZ_DIR"/build
+# v2.9.4 contains the bug
 
-git clone \
-  --branch v2.9.4 \
-  --depth 1 \
-  https://github.com/GNOME/libxml2.git \
-  "$FUZZ_DIR"/build
+wget http://xmlsoft.org/download/libxml2-2.9.4.tar.gz
+tar xvf libxml2-2.9.4.tar.gz
+mkdir -p "$FUZZ_DIR"
+mv libxml2-2.9.4 "$FUZZ_DIR"/build
+
+#git clone \
+#  --branch v2.9.4 \
+#  --depth 1 \
+#  https://github.com/GNOME/libxml2.git \
+#  "$FUZZ_DIR"/build
 
 cd "$FUZZ_DIR"/build
 
 CC="$RELEASE_DIR"/libafl_cc \
-./autogen.sh \
-  --disable-shared \
-  --without-debug \
-  --without-ftp \
-  --without-http \
-  --without-legacy \
-  --without-python \
-  --prefix "$FUZZ_DIR"/build/install
+./configure \
+--prefix="$FUZZ_DIR"/build/install \
+--disable-shared \
+--without-debug \
+--without-ftp \
+--without-http \
+--without-legacy \
+--without-python
+
+#LIBS='-ldl'
+
+
+#CC="$RELEASE_DIR"/libafl_cc \
+#./autogen.sh \
+#  --disable-shared \
+#  --without-debug \
+#  --without-ftp \
+#  --without-http \
+#  --without-legacy \
+#  --without-python \
+#  --prefix "$FUZZ_DIR"/build/install
 
 make -j$(nproc)
 make install
@@ -66,7 +81,7 @@ mkdir -p "$SCRIPT_DIR"/inputs
 cp "$FUZZ_DIR"/build/test/*.xml "$SCRIPT_DIR"/inputs
 
 #
-# Build the binary for fuzzing (does linking with libafl fuzzer)
+# Build the binary for fuzzing (does link with libafl fuzzer)
 #
 
 mkdir -p "$FUZZ_DIR"/bin
@@ -86,6 +101,7 @@ mkdir -p "$FUZZ_DIR"/bin
 lsof -t -i:1337 | xargs -I {} sudo kill -9 {}
 
 cd "$SCRIPT_DIR"
+gnome-terminal
 
 taskset -c 4 ./fuzz/bin/fuzzer
 taskset -c 6 ./fuzz/bin/fuzzer

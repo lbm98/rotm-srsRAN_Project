@@ -1,0 +1,8 @@
+add_executable(fuzz3_ex2_target target.cc pcap_de.cc)
+target_include_directories(fuzz3_ex2_target PRIVATE ${CMAKE_SOURCE_DIR})
+target_link_libraries(fuzz3_ex2_target rrc_ue_test_helpers srsran_rrc gtest)
+target_compile_definitions(fuzz3_ex2_target PRIVATE TEST_TARGET)
+
+add_executable(fuzz3_ex2_pcap_de_test pcap_de_test.cc pcap_de.cc)
+target_include_directories(fuzz3_ex2_pcap_de_test PRIVATE ${CMAKE_SOURCE_DIR})
+target_link_libraries(fuzz3_ex2_pcap_de_test srsran_pcap srslog)

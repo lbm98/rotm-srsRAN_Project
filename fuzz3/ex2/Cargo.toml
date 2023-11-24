@@ -1,5 +1,5 @@
 [package]
-name = "fuzzer_ex2"
+name = "fuzzer"
 version = "0.1.0"
 edition = "2021"
 
@@ -18,9 +18,10 @@ libafl_targets = { git = "https://github.com/AFLplusplus/LibAFL", rev = "cad2ff6
     "sancov_pcguard_hitcounts",
 ] }
 
-mimalloc = { version = "0.1.39", default-features = false }
 clap = { version = "4.0", features = ["derive"] }
+log = "0.4.20"
+serde = { version = "1.0.193", features = ["derive"] }
 
 [lib]
-name = "fuzzer"
+name = "fuzz"
 crate-type = ["staticlib"]

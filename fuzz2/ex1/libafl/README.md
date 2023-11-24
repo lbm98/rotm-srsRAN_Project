@@ -8,10 +8,10 @@
 - in-process (libfuzzer-harness)
 - sancov-pcguard-hitcounts
 - multi-core (LLMP)
+- dictionary
 
 ## TODO Features
 
 - sancov-cmplog
 - sancov-value-profile
 - os-performance-config
-- dictionary

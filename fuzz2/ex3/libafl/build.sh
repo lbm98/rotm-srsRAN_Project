@@ -50,7 +50,6 @@ git clone \
 cd "$FUZZ_DIR"/build
 
 CC="$RELEASE_DIR"/libafl_cc \
-LIBTOOL="$RELEASE_DIR"/libafl_libtool \
 ./autogen.sh \
   --disable-shared \
   --without-debug \
@@ -60,14 +59,14 @@ LIBTOOL="$RELEASE_DIR"/libafl_libtool \
   --without-python \
   --prefix "$FUZZ_DIR"/build/install
 
-V=1 make -j$(nproc)
+make -j$(nproc)
 make install
 
 mkdir -p "$SCRIPT_DIR"/inputs
 cp "$FUZZ_DIR"/build/test/*.xml "$SCRIPT_DIR"/inputs
 
 #
-# Build the binary for fuzzing (does link with libafl fuzzer)
+# Build the binary for fuzzing (does linking with libafl fuzzer)
 #
 
 mkdir -p "$FUZZ_DIR"/bin
@@ -78,8 +77,7 @@ mkdir -p "$FUZZ_DIR"/bin
   "$FUZZ_DIR"/build/install/lib/*.a \
   -I "$FUZZ_DIR"/build/install/include/libxml2 \
   -Wl,-Bstatic -lz -llzma -Wl,-Bdynamic \
-  -o "$FUZZ_DIR"/bin/fuzzer \
-  -v
+  -o "$FUZZ_DIR"/bin/fuzzer
 
 #
 # Run the fuzzer

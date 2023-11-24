@@ -1,0 +1,25 @@
+[package]
+name = "fuzzer"
+version = "0.1.0"
+edition = "2021"
+
+[profile.release]
+lto = true
+codegen-units = 1
+opt-level = 3
+debug = true
+
+[dependencies]
+libafl = { version = "0.11.1" , features = ["default"] }
+libafl_cc = { version = "0.11.1" }
+libafl_bolts = { version = "0.11.1" }
+libafl_targets = { version = "0.11.1", features = [
+    "libfuzzer",
+    "sancov_pcguard_hitcounts",
+] }
+
+mimalloc = { version = "0.1.39", default-features = false }
+
+[lib]
+name = "fuzzer"
+crate-type = ["staticlib"]
