@@ -1,0 +1,9 @@
+## CLion Configuration
+
+```
+-DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ -DENABLE_ASAN=ON -DENABLE_LIBFUZZER=ON
+```
+
+## Conf 1
+
+966 PCs

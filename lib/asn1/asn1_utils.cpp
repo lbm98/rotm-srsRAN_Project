@@ -211,6 +211,10 @@ int cbit_ref::distance(const cbit_ref& other) const
 template <class T>
 SRSASN_CODE cbit_ref::unpack(T& val, uint32_t n_bits)
 {
+  if (n_bits <= sizeof(T) * 8) {
+    return SRSASN_ERROR_DECODE_FAIL;
+  }
+
   srsran_assert(n_bits <= sizeof(T) * 8, "unpack_bits() only supports up to {} bits", sizeof(T) * 8);
   val = 0;
   while (n_bits > 0) {
@@ -1473,7 +1477,8 @@ varlength_field_pack_guard::~varlength_field_pack_guard()
 
 varlength_field_unpack_guard::varlength_field_unpack_guard(cbit_ref& bref, bool align) :
   len([&bref, align]() {
-    uint32_t len_;
+    uint32_t len_; // not initialized (holds a "random" value)
+    // Might return an SRSASN_ERROR_DECODE_FAIL, which is not handled
     unpack_length(len_, bref, align);
     return len_;
   }()),

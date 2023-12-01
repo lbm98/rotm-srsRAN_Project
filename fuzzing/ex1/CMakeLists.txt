@@ -1,13 +1,7 @@
-add_subdirectory(packet_list)
-
-
 
 add_executable(fuzzing_target target.cc pcap_mutator.cc)
 target_include_directories(fuzzing_target PRIVATE ${CMAKE_SOURCE_DIR})
-target_compile_options(fuzzing_target PRIVATE -fsanitize=fuzzer,address)
-target_link_options(fuzzing_target PRIVATE -fsanitize=fuzzer,address)
-#target_compile_options(fuzzing_target PRIVATE -fsanitize=fuzzer)
-#target_link_options(fuzzing_target PRIVATE -fsanitize=fuzzer)
+target_link_options(fuzzing_target PRIVATE -fsanitize=fuzzer)
 target_link_libraries(fuzzing_target PRIVATE rrc_ue_test_helpers srsran_rrc gtest packet_list)
 set_target_properties(fuzzing_target PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
 
